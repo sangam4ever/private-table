@@ -35,13 +35,20 @@ export function VideoBackground({
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
   };
 
+  useEffect(() => {
+    if (videoRef.current && currentVideoIndex > 0) {
+      videoRef.current.src = videos[currentVideoIndex];
+      videoRef.current.load();
+      videoRef.current.play();
+    }
+  }, [currentVideoIndex, videos]);
+
   return (
     <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
       {/* Video background - only on desktop */}
       {showVideo && (
         <video
           ref={videoRef}
-          key={currentVideoIndex}
           autoPlay
           muted
           playsInline
