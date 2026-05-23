@@ -16,7 +16,7 @@ export function VideoBackground({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Array of videos to loop through
-  const videos = ['/videos/ambient.mp4', '/videos/hero.mp4', '/videos/drink.mp4'];
+  const videos = ['/videos/ambient.mp4', '/videos/hero.mp4'];
   const currentSrc = src || videos[currentVideoIndex];
 
   useEffect(() => {
