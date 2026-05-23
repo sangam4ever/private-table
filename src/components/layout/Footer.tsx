@@ -46,10 +46,10 @@ export function Footer() {
               info@privatetablebysanjay.com
             </a>
             <a
-              href="tel:+442071234567"
+              href="tel:0481151211"
               className="text-ivory hover:text-gold transition-colors font-light"
             >
-              +44 (0) 20 7123 4567
+              0481 151 211
             </a>
           </motion.div>
 
