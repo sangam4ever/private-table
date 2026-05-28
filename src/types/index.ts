@@ -3,7 +3,6 @@ export interface Experience {
   title: string;
   tagline: string;
   description: string;
-  priceRange: string;
   guestCount: string;
   duration: string;
   imageSrc: string;

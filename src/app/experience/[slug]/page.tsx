@@ -168,7 +168,7 @@ export default function ExperiencePage({ params }: ExperiencePageProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"
           >
             <div>
               <p className="text-xs uppercase tracking-widest gold-text font-light mb-4">
@@ -184,14 +184,6 @@ export default function ExperiencePage({ params }: ExperiencePageProps) {
               </p>
               <p className="font-display text-2xl font-light text-ivory">
                 {experience.duration}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest gold-text font-light mb-4">
-                Starting Price
-              </p>
-              <p className="font-display text-2xl font-light text-ivory">
-                {experience.priceRange}
               </p>
             </div>
           </motion.div>
@@ -238,26 +230,11 @@ export default function ExperiencePage({ params }: ExperiencePageProps) {
             </ol>
           </motion.div>
 
-          {/* Pricing */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-16"
-          >
-            <h2 className="font-display text-2xl font-light text-ivory mb-4">
-              Pricing
-            </h2>
-            <p className="font-body text-ivory-60 text-lg">
-              {experienceDetails.pricing}
-            </p>
-          </motion.div>
-
           {/* CTA */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center pt-8"
           >
             <MagneticButton variant="primary" onClick={handleInquireClick}>

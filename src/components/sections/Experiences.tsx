@@ -77,10 +77,6 @@ export function Experiences() {
                     <span className="text-ivory-60">Duration:</span>
                     <span className="gold-text font-light">{exp.duration}</span>
                   </div>
-                  <div className="flex justify-between text-xs font-body">
-                    <span className="text-ivory-60">Price:</span>
-                    <span className="gold-text font-light">{exp.priceRange}</span>
-                  </div>
                 </div>
 
                 {/* Button */}
