@@ -31,6 +31,7 @@ export function InquiryForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -44,6 +45,7 @@ export function InquiryForm() {
 
   const onSubmit = async (data: InquiryFormData) => {
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const response = await fetch('/api/inquiry', {
         method: 'POST',
@@ -54,18 +56,21 @@ export function InquiryForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit inquiry');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit inquiry');
       }
 
-      console.log('Form submitted:', data);
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
       setSubmitSuccess(true);
       reset();
       setCurrentStep(1);
 
-      setTimeout(() => setSubmitSuccess(false), 3000);
+      setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to submit inquiry. Please try again.';
       console.error('Error submitting form:', error);
-      alert('Failed to submit inquiry. Please try again.');
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -115,6 +120,18 @@ export function InquiryForm() {
             exit={{ opacity: 0, y: -20 }}
           >
             Thank you for your inquiry. We&apos;ll be in touch within 24 hours.
+          </motion.div>
+        )}
+
+        {/* Error Message */}
+        {submitError && (
+          <motion.div
+            className="mb-8 p-6 bg-red-500/10 border border-red-500 text-red-400 rounded-lg text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            {submitError}
           </motion.div>
         )}
 
@@ -339,7 +356,7 @@ export function InquiryForm() {
                     <option value="intimate">The Intimate Table</option>
                     <option value="soiree">The Private Soirée</option>
                     <option value="grand">The Grand Event</option>
-                    <option value="bespoke">Bespoke Experience</option>
+                    <option value="outdoor">Outdoor Events</option>
                   </select>
                   {errors.experienceType && <p className="text-red-400 text-xs mt-2">{errors.experienceType.message}</p>}
                 </motion.div>
@@ -382,21 +399,21 @@ export function InquiryForm() {
             )}
 
             {currentStep < STEPS.length ? (
-              <MagneticButton
-                variant="primary"
+              <button
+                type="button"
                 onClick={handleNext}
-                className={`flex-1 text-center ${currentStep === 1 ? 'flex-none w-full' : ''}`}
+                className="flex-1 text-center px-8 py-3 bg-gold text-obsidian font-light rounded-full hover:bg-gold-light transition-colors disabled:opacity-50"
               >
                 Next Step
-              </MagneticButton>
+              </button>
             ) : (
-              <MagneticButton
-                variant="primary"
-                className="flex-1 text-center"
-                onClick={() => {}}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1 text-center px-8 py-3 bg-gold text-obsidian font-light rounded-full hover:bg-gold-light transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {isSubmitting ? 'Submitting...' : 'Send Inquiry'}
-              </MagneticButton>
+              </button>
             )}
           </motion.div>
         </motion.form>
