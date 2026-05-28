@@ -16,7 +16,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = 'https://theprivatetable.co.uk';
+  const baseUrl = 'https://privatetablebysanjay.com';
   const experienceUrl = `${baseUrl}/experience/${experience.id}`;
 
   const descriptionMap: Record<string, string> = {

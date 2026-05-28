@@ -4,7 +4,7 @@ import { LenisProvider } from '@/lib/lenis';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://theprivatetable.co.uk'),
+  metadataBase: new URL('https://privatetablebysanjay.com'),
   title: 'The Private Table by Sanjay | Luxury Private Chef',
   description:
     'An intimate culinary experience crafted exclusively for you. Michelin-calibre cuisine, prepared in the privacy of your home. Private dining in London.',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: 'The Private Table by Sanjay',
     description:
       'Michelin-calibre cuisine, crafted exclusively for you. Private dining experiences in London.',
-    url: 'https://theprivatetable.co.uk',
+    url: 'https://privatetablebysanjay.com',
     type: 'website',
     images: [
       {
@@ -54,9 +54,9 @@ export default function RootLayout({
     '@type': 'LocalBusiness',
     name: 'The Private Table by Sanjay',
     description: 'Luxury private chef services offering bespoke culinary experiences',
-    url: 'https://theprivatetable.co.uk',
+    url: 'https://privatetablebysanjay.com',
     telephone: '+44',
-    email: 'inquiry@theprivatetable.co.uk',
+    email: 'inquiry@privatetablebysanjay.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '',
@@ -65,7 +65,7 @@ export default function RootLayout({
       postalCode: '',
       addressCountry: 'GB',
     },
-    image: 'https://theprivatetable.co.uk/images/logo.png',
+    image: 'https://privatetablebysanjay.com/images/logo.png',
     priceRange: '£££',
     areaServed: {
       '@type': 'City',

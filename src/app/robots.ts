@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://theprivatetable.co.uk/sitemap.xml',
+    sitemap: 'https://privatetablebysanjay.com/sitemap.xml',
   };
 }
