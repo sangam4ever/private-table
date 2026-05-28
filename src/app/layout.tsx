@@ -4,6 +4,7 @@ import { LenisProvider } from '@/lib/lenis';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://theprivatetable.co.uk'),
   title: 'The Private Table by Sanjay | Luxury Private Chef',
   description:
     'An intimate culinary experience crafted exclusively for you. Michelin-calibre cuisine, prepared in the privacy of your home. Private dining in London.',
@@ -48,6 +49,37 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'The Private Table by Sanjay',
+    description: 'Luxury private chef services offering bespoke culinary experiences',
+    url: 'https://theprivatetable.co.uk',
+    telephone: '+44',
+    email: 'inquiry@theprivatetable.co.uk',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '',
+      addressLocality: 'London',
+      addressRegion: 'England',
+      postalCode: '',
+      addressCountry: 'GB',
+    },
+    image: 'https://theprivatetable.co.uk/images/logo.png',
+    priceRange: '£££',
+    areaServed: {
+      '@type': 'City',
+      name: 'London',
+    },
+    knowsAbout: [
+      'Michelin-calibre cuisine',
+      'Private dining',
+      'Bespoke menus',
+      'Luxury catering',
+      'Outdoor events',
+    ],
+  };
+
   return (
     <html
       lang="en"
@@ -56,6 +88,10 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#0a0a0a" />
         <link rel="icon" href="/images/logo.png" type="image/png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="bg-obsidian text-ivory antialiased">
         <LenisProvider>{children}</LenisProvider>
