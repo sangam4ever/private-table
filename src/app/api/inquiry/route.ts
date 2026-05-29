@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
-import { saveInquiry } from '@/lib/inquiry-storage';
+import { saveInquiry } from '@/lib/inquiry-supabase';
 import { generateClientConfirmationEmail, generateAdminNotificationEmail } from '@/lib/email-templates';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
