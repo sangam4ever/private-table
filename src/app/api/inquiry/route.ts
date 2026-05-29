@@ -44,16 +44,29 @@ export async function POST(request: NextRequest) {
 
     // Save inquiry to Supabase and get reference number
     console.log('Saving inquiry to Supabase...');
-    const referenceNumber = await saveInquiry({
-      name,
-      email,
-      phone,
-      eventDate,
-      guestCount,
-      experienceType,
-      additionalNotes,
-    });
-    console.log('Inquiry saved successfully. Reference:', referenceNumber);
+    let referenceNumber: string;
+    try {
+      referenceNumber = await saveInquiry({
+        name,
+        email,
+        phone,
+        eventDate,
+        guestCount,
+        experienceType,
+        additionalNotes,
+      });
+      console.log('Inquiry saved successfully. Reference:', referenceNumber);
+    } catch (dbError) {
+      console.error('Database save failed:', dbError);
+      // Generate reference number even if save fails, so emails can still be sent
+      const date = new Date();
+      const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
+      const randomNum = Math.floor(Math.random() * 10000)
+        .toString()
+        .padStart(4, '0');
+      referenceNumber = `PT-${dateStr}-${randomNum}`;
+      console.log('Generated reference number without DB save:', referenceNumber);
+    }
 
     const emailData = {
       name,
