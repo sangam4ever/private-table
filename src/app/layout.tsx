@@ -2,13 +2,15 @@ import type { Metadata } from 'next';
 import { cormorantGaramond, jost } from '@/lib/fonts';
 import { LenisProvider } from '@/lib/lenis';
 import { getFaqSchema } from '@/lib/faq-schema';
+import { getServicesSchema } from '@/lib/services-schema';
+import { getBreadcrumbSchema } from '@/lib/breadcrumb-schema';
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://privatetablebysanjay.com'),
   title: 'Private Chef Sydney | Luxury Private Dining by Sanjay',
   description:
-    'Michelin-calibre private chef services in Sydney. Bespoke culinary experiences prepared in the privacy of your home. Luxury private dining for intimate gatherings, special events, and corporate functions.',
+    'Michelin-calibre private chef services in Sydney. Bespoke culinary experiences prepared in the privacy of your home. Luxury private dining for intimate gatherings, special events, and corporate functions. Expert chef, personalized service.',
   keywords: [
     'private chef Sydney',
     'private chef',
@@ -21,8 +23,12 @@ export const metadata: Metadata = {
     'private table Sydney',
     'executive chef Sydney',
     'private catering Sydney',
+    'personal chef near me',
+    'chef for hire Sydney',
   ],
   authors: [{ name: 'The Private Table by Sanjay' }],
+  category: 'Business',
+  classification: 'Private Chef Services',
   openGraph: {
     title: 'Private Chef Sydney | The Private Table by Sanjay',
     description:
@@ -56,6 +62,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const faqSchema = getFaqSchema();
+  const servicesSchema = getServicesSchema();
+  const breadcrumbSchema = getBreadcrumbSchema();
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -126,6 +134,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#0a0a0a" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/logo.png" />
+        <meta name="description" content="Michelin-calibre private chef services in Sydney. Bespoke culinary experiences prepared in your home." />
+        <meta name="author" content="The Private Table by Sanjay" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <link rel="canonical" href="https://privatetablebysanjay.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -133,6 +145,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
       <body className="bg-obsidian text-ivory antialiased">
