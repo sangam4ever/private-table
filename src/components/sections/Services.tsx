@@ -80,6 +80,7 @@ export function Services() {
     <section id="services" className="relative w-full py-20 md:py-32 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
+          eyebrow="What We Offer"
           title="Our Services"
           subtitle="Comprehensive Culinary Solutions for Every Occasion"
         />
