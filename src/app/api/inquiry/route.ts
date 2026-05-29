@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Send email to admin
     const adminEmailPromise = resend.emails.send({
-      from: 'noreply@privatetablebysanjay.com',
+      from: 'onboarding@resend.dev',
       to: 'info@privatetablebysanjay.com',
       subject: `New Inquiry - Ref: ${referenceNumber}`,
       html: adminEmailHtml,
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to client
     const clientEmailPromise = resend.emails.send({
-      from: 'noreply@privatetablebysanjay.com',
+      from: 'onboarding@resend.dev',
       to: email,
       subject: 'Your Private Table Inquiry - Thank You',
       html: clientEmailHtml,
