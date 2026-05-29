@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { MagneticButton } from '@/components/ui/MagneticButton';
 
 // Form validation schema
 const inquirySchema = z.object({

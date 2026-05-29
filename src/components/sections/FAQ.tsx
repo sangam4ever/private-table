@@ -139,10 +139,10 @@ export function FAQ() {
             className="text-lg mb-4"
             style={{ color: '#f5f0e8' }}
           >
-            Didn't find your answer?
+            Didn&apos;t find your answer?
           </p>
           <p style={{ color: '#a89968' }}>
-            Contact us directly or fill out an inquiry form. We're here to answer any questions about creating your perfect culinary experience.
+            Contact us directly or fill out an inquiry form. We&apos;re here to answer any questions about creating your perfect culinary experience.
           </p>
         </motion.div>
       </div>

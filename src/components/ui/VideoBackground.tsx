@@ -1,7 +1,7 @@
 'use client';
 
 import { VideoBackgroundProps } from '@/types';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 
 export function VideoBackground({
   src,
@@ -17,7 +17,7 @@ export function VideoBackground({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Array of videos to loop through
-  const videos = ['/videos/ambient.mp4', '/videos/hero.mp4'];
+  const videos = useMemo(() => ['/videos/ambient.mp4', '/videos/hero.mp4'], []);
   const currentSrc = src || videos[currentVideoIndex];
   const posterImage = poster || '/images/dining-scene.png';
 

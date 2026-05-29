@@ -111,7 +111,7 @@ export function Services() {
                   className="text-sm font-semibold mb-3 uppercase tracking-wide"
                   style={{ color: '#c9a84c' }}
                 >
-                  What's Included
+                  What&apos;s Included
                 </p>
                 <ul className="space-y-2">
                   {service.details.map((detail, i) => (
