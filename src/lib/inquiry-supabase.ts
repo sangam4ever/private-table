@@ -23,7 +23,10 @@ export async function saveInquiry(inquiryData: StoredInquiry): Promise<string> {
   try {
     const referenceNumber = generateReferenceNumber();
 
-    const { error } = await supabase.from('inquiries').insert({
+    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.log('Supabase Key exists:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
+    const insertData = {
       reference_number: referenceNumber,
       name: inquiryData.name,
       email: inquiryData.email,
@@ -32,16 +35,24 @@ export async function saveInquiry(inquiryData: StoredInquiry): Promise<string> {
       guest_count: inquiryData.guestCount,
       experience_type: inquiryData.experienceType,
       additional_notes: inquiryData.additionalNotes || null,
-    });
+    };
+
+    console.log('Attempting to insert:', { reference_number: referenceNumber, email: inquiryData.email });
+
+    const { data, error } = await supabase.from('inquiries').insert([insertData]).select();
 
     if (error) {
-      console.error('Supabase insert error:', error);
+      console.error('Supabase insert error code:', error.code);
+      console.error('Supabase insert error message:', error.message);
+      console.error('Supabase insert error details:', error);
       throw new Error(`Failed to save inquiry: ${error.message}`);
     }
 
+    console.log('Insert successful:', data);
     return referenceNumber;
   } catch (error) {
-    console.error('Error saving inquiry to Supabase:', error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error('Error saving inquiry to Supabase:', errorMsg);
     throw error;
   }
 }
