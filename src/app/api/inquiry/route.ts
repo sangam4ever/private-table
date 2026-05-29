@@ -42,30 +42,30 @@ export async function POST(request: NextRequest) {
 
     console.log('Resend client initialized successfully');
 
-    // Save inquiry to Supabase and get reference number
-    console.log('Saving inquiry to Supabase...');
-    let referenceNumber: string;
-    try {
-      referenceNumber = await saveInquiry({
-        name,
-        email,
-        phone,
-        eventDate,
-        guestCount,
-        experienceType,
-        additionalNotes,
-      });
-      console.log('Inquiry saved successfully. Reference:', referenceNumber);
-    } catch (dbError) {
-      console.error('Database save failed:', dbError);
-      // Generate reference number even if save fails, so emails can still be sent
-      const date = new Date();
-      const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
-      const randomNum = Math.floor(Math.random() * 10000)
-        .toString()
-        .padStart(4, '0');
-      referenceNumber = `PT-${dateStr}-${randomNum}`;
-      console.log('Generated reference number without DB save:', referenceNumber);
+    // Generate reference number (database save is optional)
+    const date = new Date();
+    const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
+    const randomNum = Math.floor(Math.random() * 10000)
+      .toString()
+      .padStart(4, '0');
+    const referenceNumber = `PT-${dateStr}-${randomNum}`;
+
+    // Try to save to Supabase (non-critical - emails are the priority)
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      try {
+        await saveInquiry({
+          name,
+          email,
+          phone,
+          eventDate,
+          guestCount,
+          experienceType,
+          additionalNotes,
+        });
+      } catch (dbError) {
+        // Log but don't fail - emails are more important than database storage
+        console.error('Database save failed (non-critical):', dbError);
+      }
     }
 
     const emailData = {

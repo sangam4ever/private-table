@@ -23,8 +23,10 @@ export async function saveInquiry(inquiryData: StoredInquiry): Promise<string> {
   try {
     const referenceNumber = generateReferenceNumber();
 
-    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
-    console.log('Supabase Key exists:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+    // Check credentials
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      throw new Error('Supabase credentials not configured in environment');
+    }
 
     const insertData = {
       reference_number: referenceNumber,
@@ -37,23 +39,17 @@ export async function saveInquiry(inquiryData: StoredInquiry): Promise<string> {
       additional_notes: inquiryData.additionalNotes || null,
     };
 
-    console.log('Attempting to insert:', { reference_number: referenceNumber, email: inquiryData.email });
-
     const { data, error } = await supabase.from('inquiries').insert([insertData]).select();
 
     if (error) {
-      console.error('Supabase insert error code:', error.code);
-      console.error('Supabase insert error message:', error.message);
-      console.error('Supabase insert error details:', error);
-      throw new Error(`Failed to save inquiry: ${error.message}`);
+      throw new Error(`Supabase Error [${error.code}]: ${error.message}`);
     }
 
-    console.log('Insert successful:', data);
     return referenceNumber;
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    console.error('Error saving inquiry to Supabase:', errorMsg);
-    throw error;
+    // Re-throw with context
+    throw new Error(`Database Save Failed: ${errorMsg}`);
   }
 }
 
