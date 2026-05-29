@@ -31,11 +31,11 @@ export async function generateMetadata({
     description: descriptionMap[experience.id] || experience.description,
     keywords: [
       experience.title,
-      'private chef',
-      'luxury dining',
+      'private chef Sydney',
+      'luxury dining Sydney',
       'private dining experience',
-      'Michelin chef',
-      'London',
+      'Michelin-trained chef',
+      'Sydney',
       'bespoke menu',
     ],
     openGraph: {
