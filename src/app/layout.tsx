@@ -124,7 +124,8 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#0a0a0a" />
-        <link rel="icon" href="/images/logo.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/logo.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
