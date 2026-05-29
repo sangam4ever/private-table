@@ -32,6 +32,7 @@ export function InquiryForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -62,11 +63,15 @@ export function InquiryForm() {
 
       const result = await response.json();
       console.log('Form submitted successfully:', result);
+      setReferenceNumber(result.referenceNumber);
       setSubmitSuccess(true);
       reset();
       setCurrentStep(1);
 
-      setTimeout(() => setSubmitSuccess(false), 5000);
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        setReferenceNumber(null);
+      }, 7000);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to submit inquiry. Please try again.';
       console.error('Error submitting form:', error);
@@ -114,12 +119,20 @@ export function InquiryForm() {
         {/* Success Message */}
         {submitSuccess && (
           <motion.div
-            className="mb-8 p-6 bg-gold/10 border border-gold text-gold rounded-lg text-center"
+            className="mb-8 p-8 bg-gold/10 border border-gold rounded-lg text-center"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            Thank you for your inquiry. We&apos;ll be in touch within 24 hours.
+            <p className="text-gold font-light mb-4">✓ Thank you for your inquiry</p>
+            {referenceNumber && (
+              <div className="mt-6 pt-6 border-t border-gold/30">
+                <p className="text-xs uppercase tracking-widest text-gold/80 mb-2">Your Reference Number</p>
+                <p className="text-2xl font-light text-gold mb-3">{referenceNumber}</p>
+                <p className="text-sm text-gold/70">Save this for your records. You&apos;ll receive a confirmation email shortly.</p>
+              </div>
+            )}
+            <p className="text-sm text-gold/70 mt-6">We&apos;ll be in touch within 24 hours.</p>
           </motion.div>
         )}
 
