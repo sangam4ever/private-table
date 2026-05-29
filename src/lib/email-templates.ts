@@ -5,6 +5,8 @@ export interface EmailTemplateData {
   guestCount: string;
   experienceType: string;
   referenceNumber: string;
+  phone?: string;
+  additionalNotes?: string;
 }
 
 const experienceMap: Record<string, string> = {

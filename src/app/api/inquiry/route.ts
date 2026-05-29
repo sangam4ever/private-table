@@ -44,6 +44,8 @@ export async function POST(request: NextRequest) {
       guestCount,
       experienceType,
       referenceNumber,
+      phone,
+      additionalNotes,
     };
 
     // Generate email templates
