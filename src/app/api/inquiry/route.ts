@@ -7,11 +7,15 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('=== Inquiry API Called ===');
     const body = await request.json();
+    console.log('Request body received:', { name: body.name, email: body.email });
+
     const { name, email, phone, eventDate, guestCount, experienceType, additionalNotes } = body;
 
     // Validate required fields
     if (!name || !email || !eventDate || !guestCount || !experienceType) {
+      console.error('Missing required fields');
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -26,7 +30,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save inquiry to JSON file and get reference number
+    console.log('Resend client initialized successfully');
+
+    // Save inquiry to Supabase and get reference number
+    console.log('Saving inquiry to Supabase...');
     const referenceNumber = await saveInquiry({
       name,
       email,
@@ -36,6 +43,7 @@ export async function POST(request: NextRequest) {
       experienceType,
       additionalNotes,
     });
+    console.log('Inquiry saved successfully. Reference:', referenceNumber);
 
     const emailData = {
       name,
