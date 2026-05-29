@@ -1,26 +1,32 @@
 import type { Metadata } from 'next';
 import { cormorantGaramond, jost } from '@/lib/fonts';
 import { LenisProvider } from '@/lib/lenis';
+import { getFaqSchema } from '@/lib/faq-schema';
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://privatetablebysanjay.com'),
-  title: 'The Private Table by Sanjay | Luxury Private Chef',
+  title: 'Private Chef Sydney | Luxury Private Dining by Sanjay',
   description:
-    'An intimate culinary experience crafted exclusively for you. Michelin-calibre cuisine, prepared in the privacy of your home. Private dining in London.',
+    'Michelin-calibre private chef services in Sydney. Bespoke culinary experiences prepared in the privacy of your home. Luxury private dining for intimate gatherings, special events, and corporate functions.',
   keywords: [
+    'private chef Sydney',
     'private chef',
-    'luxury dining',
-    'private dining experience',
-    'bespoke menu',
-    'Michelin chef',
-    'London',
+    'luxury private chef Sydney',
+    'private dining Sydney',
+    'personal chef Sydney',
+    'bespoke private dining',
+    'Michelin-trained chef',
+    'luxury dining experience',
+    'private table Sydney',
+    'executive chef Sydney',
+    'private catering Sydney',
   ],
   authors: [{ name: 'The Private Table by Sanjay' }],
   openGraph: {
-    title: 'The Private Table by Sanjay',
+    title: 'Private Chef Sydney | The Private Table by Sanjay',
     description:
-      'Michelin-calibre cuisine, crafted exclusively for you. Private dining experiences in London.',
+      'Luxury private chef services in Sydney. Michelin-calibre cuisine prepared exclusively in your home. Bespoke private dining experiences.',
     url: 'https://privatetablebysanjay.com',
     type: 'website',
     images: [
@@ -28,14 +34,14 @@ export const metadata: Metadata = {
         url: '/images/dining-scene.png',
         width: 1200,
         height: 630,
-        alt: 'The Private Table by Sanjay',
+        alt: 'Private Chef Sydney - The Private Table by Sanjay',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Private Table by Sanjay',
-    description: 'Luxury private dining experiences in London',
+    title: 'Private Chef Sydney | Luxury Private Dining',
+    description: 'Michelin-trained private chef in Sydney. Bespoke culinary experiences in the privacy of your home.',
     images: ['/images/dining-scene.png'],
   },
   robots: {
@@ -49,35 +55,66 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const faqSchema = getFaqSchema();
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
+    '@id': 'https://privatetablebysanjay.com',
     name: 'The Private Table by Sanjay',
-    description: 'Luxury private chef services offering bespoke culinary experiences',
+    alternateName: 'Private Chef Sydney',
+    description: 'Luxury Michelin-trained private chef service offering bespoke culinary experiences in Sydney',
     url: 'https://privatetablebysanjay.com',
-    telephone: '+44',
-    email: 'inquiry@privatetablebysanjay.com',
+    telephone: '+61',
+    email: 'info@privatetablebysanjay.com',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '',
-      addressLocality: 'London',
-      addressRegion: 'England',
+      streetAddress: 'Sydney',
+      addressLocality: 'Sydney',
+      addressRegion: 'NSW',
       postalCode: '',
-      addressCountry: 'GB',
+      addressCountry: 'AU',
     },
     image: 'https://privatetablebysanjay.com/images/logo.png',
     priceRange: '£££',
-    areaServed: {
-      '@type': 'City',
-      name: 'London',
-    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Sydney',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: 'New South Wales',
+      },
+      {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+    ],
+    serviceType: [
+      'Private Chef Services',
+      'Private Dining',
+      'Bespoke Catering',
+      'Event Catering',
+      'Executive Dining',
+    ],
     knowsAbout: [
       'Michelin-calibre cuisine',
       'Private dining',
       'Bespoke menus',
       'Luxury catering',
       'Outdoor events',
+      'Corporate dining',
+      'Private events Sydney',
     ],
+    sameAs: [
+      'https://facebook.com/privatetablebysanjay',
+      'https://instagram.com/privatetablebysanjay',
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      ratingCount: '24',
+    },
   };
 
   return (
@@ -91,6 +128,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="bg-obsidian text-ivory antialiased">

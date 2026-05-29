@@ -1,0 +1,12 @@
+# The Private Table by Sanjay - robots.txt
+# Allow all crawlers to index the site
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://theprivatetable.co.uk/sitemap.xml
+
+# Crawl delay for responsible crawling
+Crawl-delay: 1

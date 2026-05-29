@@ -40,7 +40,7 @@ export function Hero() {
           className="text-xs md:text-sm tracking-widest uppercase font-body mb-8"
           style={{ color: '#c9a84c', fontSize: '14px', letterSpacing: '2px' }}
         >
-          Private Chef · Sydney, Australia
+          Luxury Private Chef · Sydney, NSW, Australia
         </p>
 
         {/* Main Title with word split */}
