@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { MagneticButton } from '@/components/ui/MagneticButton';
@@ -80,11 +79,11 @@ export function Experiences() {
                 </div>
 
                 {/* Button */}
-                <Link href={`/experience/${exp.id}`} className="block">
+                <a href="#inquiry" className="block">
                   <MagneticButton variant="ghost" className="w-full text-center">
-                    Learn More
+                    Inquire About {exp.title}
                   </MagneticButton>
-                </Link>
+                </a>
               </div>
             </motion.article>
           ))}
