@@ -8,8 +8,18 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 export async function POST(request: NextRequest) {
   try {
     console.log('=== Inquiry API Called ===');
-    const body = await request.json();
-    console.log('Request body received:', { name: body.name, email: body.email });
+
+    let body;
+    try {
+      body = await request.json();
+      console.log('Request body received:', { name: body.name, email: body.email });
+    } catch (parseError) {
+      console.error('Failed to parse request body:', parseError);
+      return NextResponse.json(
+        { error: 'Invalid request format' },
+        { status: 400 }
+      );
+    }
 
     const { name, email, phone, eventDate, guestCount, experienceType, additionalNotes } = body;
 
@@ -85,7 +95,9 @@ export async function POST(request: NextRequest) {
       referenceNumber,
     });
   } catch (error) {
-    console.error('Inquiry processing error:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Inquiry processing error:', errorMessage);
+    console.error('Full error:', error);
     return NextResponse.json(
       { error: 'Failed to send inquiry. Please try again or contact us directly.' },
       { status: 500 }
