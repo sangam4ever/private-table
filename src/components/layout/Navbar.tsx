@@ -41,7 +41,16 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <motion.div whileHover={{ opacity: 0.8 }} transition={{ duration: 0.3 }}>
+        <motion.button
+          onClick={() => {
+            if (lenis) {
+              lenis.scrollTo(0, { duration: 2 });
+            }
+          }}
+          whileHover={{ opacity: 0.8 }}
+          transition={{ duration: 0.3 }}
+          className="cursor-pointer bg-none border-none p-0"
+        >
           <Image
             src="/images/logo.png"
             alt="The Private Table by Sanjay"
@@ -50,7 +59,7 @@ export function Navbar() {
             className="h-24 w-auto"
             priority
           />
-        </motion.div>
+        </motion.button>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-12">

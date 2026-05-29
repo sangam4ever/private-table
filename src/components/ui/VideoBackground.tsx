@@ -13,16 +13,22 @@ export function VideoBackground({
 }: VideoBackgroundProps) {
   const [showVideo, setShowVideo] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Array of videos to loop through
   const videos = ['/videos/ambient.mp4', '/videos/hero.mp4'];
   const currentSrc = src || videos[currentVideoIndex];
+  const posterImage = poster || '/images/dining-scene.png';
 
   useEffect(() => {
     // Show video on all screen sizes
     setShowVideo(true);
   }, []);
+
+  const handleCanPlay = () => {
+    setIsVideoReady(true);
+  };
 
   useEffect(() => {
     if (videoRef.current && typeof playbackSpeed === 'number') {
@@ -47,20 +53,33 @@ export function VideoBackground({
     <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
       {/* Video background - only on desktop */}
       {showVideo && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          preload="metadata"
-          poster={poster}
-          className="w-full h-full object-cover"
-          style={{ objectPosition: '60% 50%' }}
-          onEnded={handleVideoEnd}
-        >
-          <source src={currentSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            poster={posterImage}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '60% 50%', opacity: isVideoReady ? 1 : 0, transition: 'opacity 0.3s ease-in' }}
+            onEnded={handleVideoEnd}
+            onCanPlay={handleCanPlay}
+          >
+            <source src={currentSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Poster shows while video is loading */}
+          {!isVideoReady && (
+            <div
+              className="absolute inset-0 w-full h-full bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${posterImage})`,
+              }}
+            />
+          )}
+        </>
       )}
 
       {/* Poster fallback for mobile */}

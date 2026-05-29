@@ -25,6 +25,7 @@ export function Hero() {
       <VideoBackground
         overlayOpacity={0.5}
         playbackSpeed={playbackRate}
+        poster="/images/dining-scene.png"
       />
 
       {/* Hero Content */}
