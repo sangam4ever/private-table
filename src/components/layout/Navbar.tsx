@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { useLenis } from '@/lib/lenis';
 
@@ -12,6 +12,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lenis = useLenis();
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +33,7 @@ export function Navbar() {
       }
     } else {
       // If on other pages, navigate to home with anchor
-      window.location.href = `/#${id}`;
+      router.push(`/#${id}`);
     }
   };
 
