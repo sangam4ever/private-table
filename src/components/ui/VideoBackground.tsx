@@ -50,46 +50,43 @@ export function VideoBackground({
   }, [currentVideoIndex, videos]);
 
   return (
-    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
-      {/* Video background - only on desktop */}
+    <div
+      className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}
+      style={{ backgroundColor: '#0a0a0a' }}
+    >
+      {/* Background poster - always visible until video plays */}
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${posterImage})`,
+          backgroundPosition: '60% 50%',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Video background */}
       {showVideo && (
-        <>
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            poster={posterImage}
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '60% 50%', opacity: isVideoReady ? 1 : 0, transition: 'opacity 0.3s ease-in' }}
-            onEnded={handleVideoEnd}
-            onCanPlay={handleCanPlay}
-          >
-            <source src={currentSrc} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-
-          {/* Poster shows while video is loading */}
-          {!isVideoReady && (
-            <div
-              className="absolute inset-0 w-full h-full bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${posterImage})`,
-              }}
-            />
-          )}
-        </>
-      )}
-
-      {/* Poster fallback for mobile */}
-      {!showVideo && (
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          poster={posterImage}
+          className="w-full h-full object-cover"
           style={{
-            backgroundImage: `url(${poster})`,
+            objectPosition: '60% 50%',
+            opacity: isVideoReady ? 1 : 0,
+            transition: 'opacity 0.3s ease-in',
+            zIndex: 1,
+            position: 'absolute',
           }}
-        />
+          onEnded={handleVideoEnd}
+          onCanPlay={handleCanPlay}
+        >
+          <source src={currentSrc} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       )}
 
       {/* Overlay for cinematic effect */}
@@ -98,6 +95,7 @@ export function VideoBackground({
         style={{
           backgroundColor: overlayColor,
           opacity: overlayOpacity,
+          zIndex: 2,
         }}
       />
     </div>
