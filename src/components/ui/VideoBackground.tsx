@@ -51,19 +51,8 @@ export function VideoBackground({
 
   return (
     <div
-      className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}
-      style={{ backgroundColor: '#0a0a0a' }}
+      className={`absolute inset-0 w-full h-full overflow-hidden bg-obsidian ${className}`}
     >
-      {/* Background poster - always visible until video plays */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${posterImage})`,
-          backgroundPosition: '60% 50%',
-          zIndex: 0,
-        }}
-      />
-
       {/* Video background */}
       {showVideo && (
         <video
@@ -72,14 +61,11 @@ export function VideoBackground({
           muted
           playsInline
           preload="auto"
-          poster={posterImage}
           className="w-full h-full object-cover"
           style={{
             objectPosition: '60% 50%',
             opacity: isVideoReady ? 1 : 0,
             transition: 'opacity 0.3s ease-in',
-            zIndex: 1,
-            position: 'absolute',
           }}
           onEnded={handleVideoEnd}
           onCanPlay={handleCanPlay}
@@ -95,7 +81,6 @@ export function VideoBackground({
         style={{
           backgroundColor: overlayColor,
           opacity: overlayOpacity,
-          zIndex: 2,
         }}
       />
     </div>
