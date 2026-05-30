@@ -8,7 +8,6 @@ import { Services } from '@/components/sections/Services';
 import { ProcessTimeline } from '@/components/sections/ProcessTimeline';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
-import { InquiryForm } from '@/components/sections/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
 
 export default function Home() {
@@ -23,7 +22,6 @@ export default function Home() {
         <ProcessTimeline />
         <Testimonials />
         <FAQ />
-        <InquiryForm />
       </main>
       <Footer />
     </div>

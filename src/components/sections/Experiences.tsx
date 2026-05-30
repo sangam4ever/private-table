@@ -79,7 +79,7 @@ export function Experiences() {
                 </div>
 
                 {/* Button */}
-                <a href="#inquiry" className="block">
+                <a href="/get-started" className="block">
                   <MagneticButton variant="ghost" className="w-full text-center">
                     Inquire About {exp.title}
                   </MagneticButton>

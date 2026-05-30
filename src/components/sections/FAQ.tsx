@@ -142,7 +142,10 @@ export function FAQ() {
             Didn&apos;t find your answer?
           </p>
           <p style={{ color: '#a89968' }}>
-            Contact us directly or fill out an inquiry form. We&apos;re here to answer any questions about creating your perfect culinary experience.
+            <a href="/get-started" className="hover:opacity-80 transition-opacity">
+              Submit an inquiry
+            </a>
+            {' '}or contact us directly. We&apos;re here to answer any questions about creating your perfect culinary experience.
           </p>
         </motion.div>
       </div>

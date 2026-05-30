@@ -92,13 +92,14 @@ export function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <MagneticButton
-            variant="primary"
-            onClick={() => handleNavClick('inquiry')}
-            className="px-6 py-3 text-base font-semibold"
-          >
-            Inquire Now
-          </MagneticButton>
+          <a href="/get-started">
+            <MagneticButton
+              variant="primary"
+              className="px-6 py-3 text-base font-semibold"
+            >
+              Inquire Now
+            </MagneticButton>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -143,8 +144,6 @@ export function Navbar() {
             { label: 'About', id: 'about' },
             { label: 'Experiences', id: 'experiences' },
             { label: 'Process', id: 'process' },
-            { label: 'Gallery', id: 'gallery' },
-            { label: 'Inquire', id: 'inquiry' },
           ].map((item) => (
             <button
               key={item.id}
@@ -154,6 +153,9 @@ export function Navbar() {
               {item.label}
             </button>
           ))}
+          <a href="/get-started" className="text-ivory font-body text-sm tracking-wide gold-text hover:text-gold transition-colors text-left">
+            Inquire Now
+          </a>
         </div>
       </motion.div>
     </motion.nav>

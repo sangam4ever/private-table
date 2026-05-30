@@ -3,11 +3,9 @@
 import { motion } from 'framer-motion';
 import { VideoBackground } from '@/components/ui/VideoBackground';
 import { MagneticButton } from '@/components/ui/MagneticButton';
-import { useLenis } from '@/lib/lenis';
 import { useScrollPlaybackRate } from '@/hooks/useScrollPlaybackRate';
 
 export function Hero() {
-  const lenis = useLenis();
   const playbackRate = useScrollPlaybackRate(0.85);
 
   // Split title into words for staggered reveal
@@ -78,16 +76,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          <MagneticButton
-            variant="primary"
-            onClick={() => {
-              if (lenis) {
-                lenis.scrollTo('#inquiry', { duration: 2 });
-              }
-            }}
-          >
-            Begin Your Experience
-          </MagneticButton>
+          <a href="/get-started">
+            <MagneticButton variant="primary">
+              Begin Your Experience
+            </MagneticButton>
+          </a>
         </motion.div>
       </div>
 
