@@ -4,6 +4,7 @@ import { LenisProvider } from '@/lib/lenis';
 import { getFaqSchema } from '@/lib/faq-schema';
 import { getServicesSchema } from '@/lib/services-schema';
 import { getBreadcrumbSchema } from '@/lib/breadcrumb-schema';
+import { FloatingCTA } from '@/components/ui/FloatingCTA';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -157,6 +158,7 @@ export default function RootLayout({
       </head>
       <body className="bg-obsidian text-ivory antialiased">
         <LenisProvider>{children}</LenisProvider>
+        <FloatingCTA />
       </body>
     </html>
   );
