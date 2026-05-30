@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { useLenis } from '@/lib/lenis';
 
@@ -10,6 +11,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lenis = useLenis();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +24,15 @@ export function Navbar() {
 
   const handleNavClick = (id: string) => {
     setIsMobileMenuOpen(false);
-    if (lenis) {
-      lenis.scrollTo(`#${id}`, { duration: 2 });
+
+    // If on home page, scroll to section
+    if (pathname === '/') {
+      if (lenis) {
+        lenis.scrollTo(`#${id}`, { duration: 2 });
+      }
+    } else {
+      // If on other pages, navigate to home with anchor
+      window.location.href = `/#${id}`;
     }
   };
 
@@ -41,15 +50,19 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <motion.button
-          onClick={() => {
-            if (lenis) {
-              lenis.scrollTo(0, { duration: 2 });
+        <motion.a
+          href="/"
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              if (lenis) {
+                lenis.scrollTo(0, { duration: 2 });
+              }
             }
           }}
           whileHover={{ opacity: 0.8 }}
           transition={{ duration: 0.3 }}
-          className="cursor-pointer bg-none border-none p-0"
+          className="cursor-pointer"
         >
           <Image
             src="/images/logo.png"
@@ -59,7 +72,7 @@ export function Navbar() {
             className="h-24 w-auto"
             priority
           />
-        </motion.button>
+        </motion.a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-12">
